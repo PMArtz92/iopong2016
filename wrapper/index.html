@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <title>Controller</title>
 
     <link href="/iopong2016/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
@@ -11,7 +12,8 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="/iopong2016/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="-webkit-touch-callout: none;
+-webkit-user-select: none;">
 
 <br><br><br>
 <!--<div>-->
@@ -20,10 +22,12 @@
 <!--</div>-->
 <div class="container player-controlls">
     <div class="">
-        <div id = "upButton"  class="col-lg-offset-5 col-lg-5 player-upButton"></div>
+        <div id = "upButton"  class="col-lg-12 player-upButton"></div>
     </div>
     <div class="">
-        <div id = "downButton" class="col-lg-offset-5 col-lg-5 player-downButton"></div>
+        <div id = "downButton" class="col-lg-12 player-downButton"></div>
+    </div>
+    <div id="text01">
     </div>
 </div>
 
@@ -71,6 +75,65 @@
             'onfailure': onFailure
         });
     }
+
+   function absorbEvent_(event) {
+       var e = event || window.event;
+       e.preventDefault && e.preventDefault();
+       e.stopPropagation && e.stopPropagation();
+       e.cancelBubble = true;
+       e.returnValue = false;
+       return false;
+   }
+
+   function preventLongPressMenu(node) {
+       node.ontouchstart = absorbEvent_;
+       node.ontouchmove = absorbEvent_;
+       node.ontouchend = absorbEvent_;
+       node.ontouchcancel = absorbEvent_;
+   }
+
+   preventLongPressMenu(document.body);
+
+   document.body.addEventListener('touchmove', function(event) {
+       event.preventDefault();
+   }, false);
+
+   var upButton1 = document.getElementById("upButton");
+   var downButton1 = document.getElementById("downButton");
+
+   upButton1.addEventListener("touchstart", upButtonPress, false);
+   upButton1.addEventListener("touchend", upButtonRelease, false);
+
+   downButton1.addEventListener("touchstart", downButtonPress, false);
+   downButton1.addEventListener("touchend", downButtonRelease, false);
+
+    function upButtonPress(e){
+       e.preventDefault();
+        socket.emit("click_function", "UpPress");
+        var coords = document.getElementById("text01");
+        coords.innerHTML  = "1 atha ariya";
+   }
+
+   function upButtonRelease(e){
+       e.preventDefault();
+       socket.emit("click_function", "UpRelease");
+       var coords = document.getElementById("text01");
+       coords.innerHTML  = "2 atha ariya";
+   }
+
+   function downButtonPress(e){
+       e.preventDefault();
+       socket.emit("click_function", "DownPress");
+       var coords = document.getElementById("text01");
+       coords.innerHTML  = "3 atha ariya";
+   }
+
+   function downButtonRelease(e){
+       e.preventDefault();
+       socket.emit("click_function", "DownRelease");
+       var coords = document.getElementById("text01");
+       coords.innerHTML  = "4 atha ariya";
+   }
 
 
 
@@ -146,35 +209,35 @@
     <script type="text/javascript">
         $(function(){
             $('.ripple').ripple({
-                color:'white',
+                color:'yellow',
                 time:'.8s'
             });
         });
 
         $('#upButton').ripple({
-            color:'white',
+            color:'yellow',
             time:'.8s'
-        }).mouseup(function() {
+        })/*.mouseup(function() {
             console.log("UP Release");
             socket.emit("click_function", "UpRelease");
 
             }).mousedown(function() {
             console.log("UP press");
             socket.emit("click_function", "UpPress");
-        });
+        })*/;
 
 
         $('#downButton').ripple({
             color:'white',
             time:'.8s'
-        }).mouseup(function() {
+        })/*.mouseup(function() {
             console.log("Down Release");
             socket.emit("click_function", "DownRelease");
         }).mousedown(function() {
             console.log("Down press");
             socket.emit("click_function", "DownPress");
 
-        });
+        })*/;
 
 
     </script>

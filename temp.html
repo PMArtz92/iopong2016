@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title></title>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
+
+</head>
+<body style="-webkit-touch-callout: none;
+-webkit-user-select: none;">
+<h1>my testing</h1>
+
+<div id="coords"></div>
+<div id="coords2"></div>
+<div id="touchzone" style="background: chartreuse; min-width: 50px; min-height: 50px; margin-top: 30px; -webkit-touch-callout: none;
+-webkit-user-select: none; /* Disable selection/copy in UIWebView */"></div>
+
+
+<script>
+
+    document.body.addEventListener('touchmove', function(event) {
+        event.preventDefault();
+    }, false);
+
+    var touchzone = document.getElementById("touchzone");
+    // Add an event handler for the touchstart event
+    touchzone.addEventListener("touchstart", touchHandler, false);
+    touchzone.addEventListener("touchend", endTouch, false);
+
+
+    function touchHandler(event) {
+        // Get a reference to our coordinates div
+        var coords = document.getElementById("coords");
+        // Write the coordinates of the touch to the div
+        coords.innerHTML = 'x: ' + event.touches[0].pageX + ', y: ' + event.touches[0].pageY;
+    }
+
+
+    function endTouch(e) {
+        e.preventDefault();
+        var coords = document.getElementById("coords2");
+        coords.innerHTML  = "badu atha ariya";
+
+    }
+
+
+    function absorbEvent_(event) {
+        var e = event || window.event;
+        e.preventDefault && e.preventDefault();
+        e.stopPropagation && e.stopPropagation();
+        e.cancelBubble = true;
+        e.returnValue = false;
+        return false;
+    }
+
+    function preventLongPressMenu(node) {
+        node.ontouchstart = absorbEvent_;
+        node.ontouchmove = absorbEvent_;
+        node.ontouchend = absorbEvent_;
+        node.ontouchcancel = absorbEvent_;
+    }
+
+    function init() {
+        preventLongPressMenu(document.getElementById('touchzone'));
+        preventLongPressMenu(document.body);
+    }
+
+
+
+
+
+</script>
+
+
+
+</body>
+</html>
