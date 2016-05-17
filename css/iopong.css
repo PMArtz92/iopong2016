@@ -1,0 +1,101 @@
+body {
+    background: url('../images/symphony.png');
+}
+.header-text{
+    text-align: center;
+    background-color: #2f2f2f;
+    height: auto;
+    color: #fff;
+}
+
+.header-text h1,h3,h2{
+    margin: 0;
+}
+
+.t-01{
+    border-bottom: solid thick #3369e8;
+}
+
+.t-02{
+     border-bottom: solid thick #d50f25;
+ }
+
+.t-03{
+    border-bottom: solid thick #eeb211;
+}
+
+.t-04{
+    border-bottom: solid thick #009925;
+}
+
+.connected-playes ul li{
+    list-style: none;
+    float: left;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    margin: 5px;
+}
+
+.connected-playes .pname{
+    float: left;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+    color: #1b1b1b;
+    font-size: 24px;
+    padding-right: 20px;
+    padding-left:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+.connected-playes .pimage{
+    float: right;
+    background-color: #3369e8 ;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top:5px;
+    padding-bottom:5px;
+}
+
+
+.connected-playes .pimage img{
+    border-radius: 50%;
+
+}
+
+/* ----------------------- Player Controll Class ----------------------- */
+
+.player-controlls{
+}
+
+.player-upButton, .player-downButton{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 36px;
+    font-weight: 900;
+    color: #fff;
+    height: auto;
+    height: 150px;
+    background-color: #000066;
+}
+/*
+
+.player-upButton{
+    width: 200px;
+    height: 100px;
+    border-style: solid;
+    border-width: 0 100px 100px 100px;
+    border-color: transparent transparent #009999 transparent;
+}
+
+.player-downButton{
+    width: 200px;
+    height: 100px;
+    border-style: solid;
+    border-width: 100px 100px 0 100px;
+    border-color: #009999 transparent transparent transparent;
+
+}*/

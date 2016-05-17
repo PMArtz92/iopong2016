@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Main Screen</title>
+    <link href="../css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <link href="../css/iopong.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="../js/socket.io.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-lg-12 header-text"><h1>Google I/O Extended - 2016</h1>
+        <h3>Sri Lanka</h3>
+        <h2>Welcome to Game Area</h2>
+        </div>
+        <div class="col-lg-3 t-01"></div>
+        <div class="col-lg-3 t-02"></div>
+        <div class="col-lg-3 t-03"></div>
+        <div class="col-lg-3 t-04"></div>
+    </div>
+
+    <div class="player-lobby">
+        <h1 >Connected...</h1>
+        <div>
+            <button type="button" id="selectPlayers">Select</button>
+        </div>
+        <div class="connected-playes">
+            <ul id = "connected_users"></ul>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+<!--<script src="http://localhost:3000/socket.io/socket.io.js"></script>-->
+
+
+<script>
+    var socket = io.connect('http://localhost:3000');
+    //var socket = io.connect('http://104.197.49.207:3000');
+    socket.emit("add-user", {"username": "mainScreen"});
+
+
+    // add user name when connected to the game server
+
+    socket.on("add-connected", function(data){
+        var element = $("<li class='players' id='"+ data.userId + "'>" + "<div class='pname'>" +data.username + "</div>" + "<span class='pimage'>" +"<img src='"+data.img +"' class='img-circle'>"+ "</span>"+ "</li>");
+        $("#connected_users").append(element,null);
+        console.log(data);
+
+    });
+
+
+    // remove user name when disconnected form the game server
+
+    socket.on("remove-connected", function(data){
+        console.log("Remove this item",data);
+
+    });
+
+    $("#selectPlayers").on("click", function(){
+        socket.emit("buttonClickEvent","selectPlayers");
+        console.log("selectPlayers");
+        return false;
+    });
+
+    socket.on("stateChange", function(data){
+        console.log(data);
+    });
+
+    socket.on("showSelectedPlayers", function(data){
+        console.log("selected players",data);
+    });
+
+
+
+</script>
+</body>
+</html>
+

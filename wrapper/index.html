@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Controller</title>
+
+    <link href="../css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
+    <link href="../css/iopong.css" rel="stylesheet" type="text/css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<br><br><br>
+<!--<div>-->
+    <!--<button  id="upButton">Up</button>-->
+    <!--<button type="button" id="downButton">Down</button>-->
+<!--</div>-->
+<div class="container player-controlls">
+    <div class="">
+        <div id = "upButton"  class="col-lg-offset-5 col-lg-5 player-upButton"></div>
+    </div>
+    <div class="">
+        <div id = "downButton" class="col-lg-offset-5 col-lg-5 player-downButton"></div>
+    </div>
+</div>
+
+<!--<p id = "tempp">Press mouse and release here.</p>-->
+
+
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<!--<meta name="google-signin-client_id" content="888847944349-s99kg1pt7h8afo75no94fapomsdprlga.apps.googleusercontent.com">-->
+<meta name="google-signin-client_id" content="924104735580-foikc3tdbdk7330icva6mc3oss6agif9.apps.googleusercontent.com">
+
+<!--<meta name="google-signin-client_id" content="483174779888-l6i7l998pbc8t5fheqbai3392ktekqns.apps.googleusercontent.com">-->
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<!--<script src="http://localhost:3000/socket.io/socket.io.js"></script>-->
+<script src="../js/socket.io.js"></script>
+
+<script src="ripple.min.js"></script>
+
+
+<div id="my-signin2"></div>
+<script>
+
+   var socket = io.connect('http://localhost:3000');
+     //var socket = io.connect('http://104.197.49.207:3000');
+
+    function onSuccess(googleUser) {
+        console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+        alert('Logged in as: ' + googleUser.getBasicProfile().getName());
+
+
+        socket.emit("add-user", {"username": googleUser.getBasicProfile().getName(), "img": googleUser.getBasicProfile().getImageUrl(), "userId": googleUser.getBasicProfile().getId(), "email": googleUser.getBasicProfile().getEmail()});
+
+    }
+    function  onFailure(error) {
+        console.log(error);
+    }
+    function renderButton() {
+        gapi.signin2.render('my-signin2', {
+            'scope': 'profile email',
+            'width': 240,
+            'height':50,
+            'longtitle': true,
+            'theme': 'dark',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+        });
+    }
+
+
+
+</script>
+
+<script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+
+<!--<script>-->
+    <!--$( "p" )-->
+            <!--.mouseup(function() {-->
+                <!--$( this ).append( "<span style='color:#f00;'>Mouse up.</span>" );-->
+            <!--})-->
+            <!--.mousedown(function() {-->
+                <!--$( this ).append( "<span style='color:#00f;'>Mouse down.</span>" );-->
+            <!--});-->
+
+
+    <!--$("#upButton").preventDefault() .mouseup(function() {-->
+            <!--$( "#tempp" ).append( "<span style='color:#f00;'>Mouse up.</span>" );-->
+            <!--})-->
+            <!--.mousedown(function() {-->
+                <!--$( "#tempp" ).append( "<span style='color:#00f;'>Mouse down.</span>" );-->
+            <!--});-->
+
+<!--</script>-->
+
+
+<script>
+
+
+
+    socket.on("notification", function(data){
+        console.log(data);
+        if (data == "confirm"){
+            playerConfirm();
+        }else{
+            alert(data);
+        }
+
+    });
+
+//
+//    $("#upButton").on("click", function(){
+//        socket.emit("click_function", "UP");
+//        console.log("click Up");
+//        return false;
+//    });
+//
+//    $("#downButton").on("click", function(){
+//        socket.emit("click_function", "DOWN");
+//        console.log("click Down");
+//        return false;
+//    });
+
+
+
+    function playerConfirm(){
+        var r = confirm("Press a button!\nEither Confirm or Cancel.\n");
+        if (r == true) {
+            socket.emit("confirmButton","playerConfirm");
+        }else{
+            socket.emit("confirmButton","playerRejected");
+        }
+
+    }
+
+
+</script>
+
+
+
+    <script type="text/javascript">
+        $(function(){
+            $('.ripple').ripple({
+                color:'white',
+                time:'.8s'
+            });
+        });
+
+        $('#upButton').ripple({
+            color:'white',
+            time:'.8s'
+        }).mouseup(function() {
+            console.log("UP Release");
+            socket.emit("click_function", "UpRelease");
+
+            }).mousedown(function() {
+            console.log("UP press");
+            socket.emit("click_function", "UpPress");
+        });
+
+
+        $('#downButton').ripple({
+            color:'white',
+            time:'.8s'
+        }).mouseup(function() {
+            console.log("Down Release");
+            socket.emit("click_function", "DownRelease");
+        }).mousedown(function() {
+            console.log("Down press");
+            socket.emit("click_function", "DownPress");
+
+        });
+
+
+    </script>
+
+
+
+</body>
+
+<style>
+    .ink {
+        display: block;
+        position: absolute;
+        background: rgba(0,0,0,.6);
+        border-radius: 100%;
+        transform: scale(0);
+    }
+
+    @keyframes ripple {
+
+        100% {opacity: 0; transform: scale(2.5);}
+
+    }
+
+
+
+</style>
+</html>
+
