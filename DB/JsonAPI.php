@@ -23,10 +23,21 @@ function setScore(){
     $p1_score = $_GET['p1_score'];
     $p2_score = $_GET['p2_score'];
 
-    $p1_update = $db->query("UPDATE `user_score` SET `score` = (`score` + '$p1_score'), `orientation` = 0 WHERE `orientation` = 'p1'");
-    $p2_update = $db->query("UPDATE `user_score` SET `score` = (`score` + '$p2_score'), `orientation` = 0 WHERE `orientation` = 'p2'");
+    $p1_update = $db->query("UPDATE `user_score` SET `score` = (`score` + '$p1_score'), `orientation` = 0 WHERE `orientation` = 1");
+    $p2_update = $db->query("UPDATE `user_score` SET `score` = (`score` + '$p2_score'), `orientation` = 0 WHERE `orientation` = 2");
     $db->commit();
     return json_encode($p2_update);
+
+}
+
+function getScore(){
+    global $db;
+    $db->beginTransaction();
+
+    $score = $db->query("SELECT * FROM `user_score` LIMIT 20");
+
+    $db->commit();
+    return json_encode($score);
 
 }
 
@@ -39,5 +50,9 @@ switch ($functionName) {
 
     case "setScore";
         echo setScore();
+        break;
+
+    case "getScore";
+        echo getScore();
         break;
 }
