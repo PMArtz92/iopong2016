@@ -305,13 +305,13 @@ io.sockets.on('connection', function (socket) {
 
   function player1Confirm(){
     io.sockets.connected[control_client["mainScreen"].socket].emit("stateChange", "Player 1 Confirmed");
-    io.sockets.connected[player1_socket_id].emit("notification", "load game control");
+    io.sockets.connected[player1_socket_id].emit("notification", "player1Ok");
 
   }
 
   function player2Confirm(){
     io.sockets.connected[control_client["mainScreen"].socket].emit("stateChange", "Player 2 Confirmed");
-    io.sockets.connected[player2_socket_id].emit("notification", "load game control");
+    io.sockets.connected[player2_socket_id].emit("notification", "player2Ok");
 
   }
 

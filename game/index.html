@@ -68,34 +68,34 @@
 
       console.log(data.pressedKey);
       //document.dispatchEvent(new CustomEvent("p1DownPress"));
-        if(data.pressedKey == 'p1DownPress'){
+        if(data.pressedKey == 3){
             document.dispatchEvent(new CustomEvent("p1DownPress"));
         }
-        else if(data.pressedKey == 'p1DownRelease'){
+        else if(data.pressedKey == 4){
             document.dispatchEvent(new CustomEvent("p1DownRelease"));
             console.log('sdkjhf');
         }
-        else if(data.pressedKey == 'p1UpPress'){
+        else if(data.pressedKey == 1){
             document.dispatchEvent(new CustomEvent("p1UpPress"));
             console.log('ttt');
         }
-        else if(data.pressedKey == 'p1UpRelease'){
+        else if(data.pressedKey == 2){
             document.dispatchEvent(new CustomEvent("p1UpRelease"));
             console.log('ttt');
         }
-        else if(data.pressedKey == 'p2UpPress'){
+        else if(data.pressedKey == 5){
             document.dispatchEvent(new CustomEvent("p2UpPress"));
             console.log('a1');
         }
-        else if(data.pressedKey == 'p2UpRelease'){
+        else if(data.pressedKey == 10){
             document.dispatchEvent(new CustomEvent("p2UpRelease"));
             console.log('a2');
         }
-        else if(data.pressedKey == 'p2DownPress'){
+        else if(data.pressedKey == 15){
             document.dispatchEvent(new CustomEvent("p2DownPress"));
             console.log('ttt');
         }
-        else if(data.pressedKey == 'p2DownRelease'){
+        else if(data.pressedKey == 20){
             document.dispatchEvent(new CustomEvent("p2DownRelease"));
             console.log('ttt');
         }
