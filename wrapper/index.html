@@ -54,10 +54,6 @@
 
 
 <script>
-    $(document).on("click", ".alert", function(e) {
-        bootbox.confirm("Hello world!", function(result) {
-            console.log(result);
-        });
 
         setTimeout(function() {
             // that's enough of that
@@ -84,9 +80,10 @@
    var alertTimeout;
 
    //game control server
-  var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
 
-  var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
+  var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true,reconnection: false});
+
+  var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true,reconnection: false});
 
 //   socket.on('connect',console.log('A connected'));
 //   socket2.on('connect',console.log('B connected'));
@@ -135,6 +132,8 @@
    function gameLoading(){
        $('#load-controls').empty();
        $('#load-controls').innerHTML = "Pelase wait till your turn comes..";
+       $('#load-controls').load("/iopong2016/wrapper/control.html");
+       console.log('pasan awooo');
 
    }
 
