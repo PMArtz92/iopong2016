@@ -104,7 +104,7 @@ Pong = {
 
   goal: function(playerNo) {
     this.scores[playerNo] += 1;
-    if (this.scores[playerNo] == 11) {
+    if (this.scores[playerNo] == 9) {
         this.menu.declareWinner(playerNo);
         //this.updateScore();
         this.stop();
