@@ -196,7 +196,7 @@ Pong = {
         var p1_score = this.scores[0];
         var p2_score = this.scores[1];
         $.getJSON("../DB/JsonAPI.php", {functionName: "setScore", p1_score: p1_score, p2_score: p2_score}, function (data) {
-            alert("Success");
+            console.log("DB Score updated");
         });
     }
 
