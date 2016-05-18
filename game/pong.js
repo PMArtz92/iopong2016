@@ -191,13 +191,6 @@ Pong = {
         ctx.drawImage(this.winner1.image, this.winner1.x, this.winner1.y);
       else if (this.winner == 1)
         ctx.drawImage(this.winner2.image, this.winner2.x, this.winner2.y);
-    },
-    updateScore: function () {
-        var p1_score = this.scores[0];
-        var p2_score = this.scores[1];
-        $.getJSON("../DB/JsonAPI.php", {functionName: "setScore", p1_score: p1_score, p2_score: p2_score}, function (data) {
-            console.log("DB Score updated");
-        });
     }
 
   },

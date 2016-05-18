@@ -110,10 +110,11 @@
     function getScore() {
         $.getJSON("../DB/JsonAPI.php", {functionName: "getScore"}, function (data) {
             //console.log(data);
+            $("#leaderboard-players").empty();
             for(var i in data){
                 var lPlayer = $("<li class='players' id='"+ data[i].user_id + "'>" + "<div class='pname col-md-7'>" + data[i].user_name + "</div>" + "<div class='pimage col-md-3'>" +"<img src='"+ data[i].img_src +"' class='img-circle'>"+ "</div>" + "<div class='pscore col-md-2'>" + data[i].top_score + "</div>" + "</li>");
 
-                $("#leaderboard-players").empty().append(lPlayer,null);
+                $("#leaderboard-players").append(lPlayer,null);
 
                 //console.log(data[i].user_id);
                 //console.log(lPlayer);
