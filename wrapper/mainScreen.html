@@ -84,6 +84,12 @@
         console.log("selected players",data);
     });
 
+    function getScore() {
+        $.getJSON("../DB/JsonAPI.php", {functionName: "getScore"}, function (data) {
+            console.log("score fetched!");
+        });
+    }
+
 
 
 </script>

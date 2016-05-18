@@ -44,6 +44,8 @@
 //    });
 
 
+
+
     socket.on("stateChange", function(data){
         console.log(data);
 
@@ -55,6 +57,15 @@
         console.log("end Game");
         return false;
     });
+
+    function gameCommence(data) {
+        var i;
+        for(i = 0; i < data.length; i++) {
+            $.getJSON("../DB/JsonAPI.php", {functionName: "setPlayer", user_id: data[i].userId, user_name: data[i].username, img_src: data[i].img, orientation: i+1}, function (data) {
+                console.log("database updated!");
+            });
+        }
+    }
 
 
 </script>
