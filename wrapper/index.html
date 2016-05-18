@@ -6,12 +6,16 @@
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
   <title>Controller</title>
 
-    <link href="../css/bootstrap-theme.css" rel="stylesheet" type="text/css">
-    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/iopong2016/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+    <link href="/iopong2016/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-    <link href="../css/iopong.css" rel="stylesheet" type="text/css">
+    <link href="/iopong2016/css/iopong.css" rel="stylesheet" type="text/css">
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script src="/iopong2016/js/bootstrap.min.js"></script>
+    <script src="/iopong2016/js/socket.io.js"></script>
+
+    <script src="/iopong2016/js/ripple.min.js"></script>
+
 </head>
 <body style="-webkit-touch-callout: none;
 -webkit-user-select: none;">
@@ -48,16 +52,13 @@
 <!--<meta name="google-signin-client_id" content="483174779888-l6i7l998pbc8t5fheqbai3392ktekqns.apps.googleusercontent.com">-->
 
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<!--<script src="http://localhost:3000/socket.io/socket.io.js"></script>-->
-<script src="../js/socket.io.js"></script>
 
-<script src="../js/ripple.min.js"></script>
 
 
 
 <script>
 
-   var socket = io.connect('http://localhost:3000');
+   //var socket = io.connect('http://localhost:3000');
     // var socket = io.connect('http://104.197.49.207:3000');
    //var socket = io.connect('http://localhost:3000');
 

@@ -2,5 +2,5 @@
 [SQL]
 host = localhost
 user = root
-password =
+password = googleio2016
 dbname = iopong_db
