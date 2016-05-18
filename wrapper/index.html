@@ -6,15 +6,24 @@
     <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
   <title>Controller</title>
 
-    <link href="../css/bootstrap-theme.css" rel="stylesheet" type="text/css">
-    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="/iopong2016/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+    <link href="/iopong2016/css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-    <link href="../css/iopong.css" rel="stylesheet" type="text/css">
+    <link href="/iopong2016/css/iopong.css" rel="stylesheet" type="text/css">
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+
+    <script src="/iopong2016/js/bootstrap.min.js"></script>
+    <script src="/iopong2016/js/socket.io.js"></script>
+
+    <script src="/iopong2016/js/ripple.min.js"></script>
+    <script src="/iopong2016/js/bootbox.min.js"></script>
+
+
 </head>
 <body style="-webkit-touch-callout: none;
 -webkit-user-select: none;">
+<p>Content here. <a class="alert" href=#>Alert!</a></p>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 <br><br><br>
 <!--<div>-->
@@ -33,10 +42,13 @@
 
 
 
+
     <div id="player-signin" class="col-lg-12">
         <div id="my-signin2" class="col-lg-offset-4"></div>
     </div>
 </div>
+
+
 
 <!--<p id = "tempp">Press mouse and release here.</p>-->
 
@@ -48,26 +60,43 @@
 <!--<meta name="google-signin-client_id" content="483174779888-l6i7l998pbc8t5fheqbai3392ktekqns.apps.googleusercontent.com">-->
 
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<!--<script src="http://localhost:3000/socket.io/socket.io.js"></script>-->
-<script src="../js/socket.io.js"></script>
-
-<script src="../js/ripple.min.js"></script>
 
 
 
 <script>
-    
-   var socket = io.connect('http://localhost:3000');
+    $(document).on("click", ".alert", function(e) {
+        bootbox.confirm("Hello world!", function(result) {
+            console.log(result);
+        });
+
+        setTimeout(function() {
+            // that's enough of that
+            bootbox.hideAll();
+        }, 3000);
+
+    });
+
+
+
+</script>
+
+<script>
+
+
+   //var socket = io.connect('http://localhost:3000');
+
     // var socket = io.connect('http://104.197.49.207:3000');
    //var socket = io.connect('http://localhost:3000');
 
 
    var playerId ;
 
-   //game control server
-   var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
+   var alertTimeout;
 
-   var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
+   //game control server
+  var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
+
+  var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
 
 //   socket.on('connect',console.log('A connected'));
 //   socket2.on('connect',console.log('B connected'));
@@ -132,6 +161,8 @@
    downButton1.addEventListener("touchstart", downButtonPress, false);
    downButton1.addEventListener("touchend", downButtonRelease, false);
 
+   signButton.addEventListener("touchstart", signButtonPress, false);
+
    //change socket --> socket2
 
     function upButtonPress(e){
@@ -168,6 +199,11 @@
 
    }
 
+    function signButtonPress(e){
+        e.preventDefault();
+        $('#my-signin2').trigger('click');
+    }
+
 
 
 </script>
@@ -200,55 +236,26 @@
 
 
     function playerConfirm(){
-        var r = confirm("Press a button!\nEither Confirm or Cancel.\n");
-        if (r == true) {
-            socket.emit("confirmButton","playerConfirm");
-        }else{
-            socket.emit("confirmButton","playerRejected");
-        }
+        //var r = confirm("Press a button!\nEither Confirm or Cancel.\n");
+
+        bootbox.confirm("Please Confirm", function(result) {
+
+            clearTimeout(alertTimeout);
+            if (result == true) {
+                socket.emit("confirmButton","playerConfirm");
+            }else{
+                socket.emit("confirmButton","playerRejected");
+            }
+        });
+
+        alertTimeout  = setTimeout(function() {
+            bootbox.hideAll();
+        }, 15000);
 
     }
 
 
 </script>
-
-
-<!--
-    <script type="text/javascript">
-        $(function(){
-            $('.ripple').ripple({
-                color:'yellow',
-                time:'.8s'
-            });
-        });
-
-        $('#upButton').ripple({
-            color:'yellow',
-            time:'.8s'
-        })/*.mouseup(function() {
-            console.log("UP Release");
-            socket.emit("click_function", "UpRelease");
-
-            }).mousedown(function() {
-            console.log("UP press");
-            socket.emit("click_function", "UpPress");
-        })*/;
-
-
-        $('#downButton').ripple({
-            color:'white',
-            time:'.8s'
-        })/*.mouseup(function() {
-            console.log("Down Release");
-            socket.emit("click_function", "DownRelease");
-        }).mousedown(function() {
-            console.log("Down press");
-            socket.emit("click_function", "DownPress");
-
-        })*/;
-
-
-    </script>-->
 
 
 

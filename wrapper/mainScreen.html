@@ -27,16 +27,23 @@
             <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 t-04"></div>
         </div>
 
-        <div class="player-lobby">
-            <h1 >Connected...</h1>
-            <div>
-                <button type="button" id="selectPlayers">Select</button>
+        <div class="row">
+            <div class="player-lobby">
+                <h1 >Connected...</h1>
+                <div>
+                    <button type="button" id="selectPlayers">Select</button>
 
-            </div>
-            <div class="connected-playes">
-                <ul id = "connected_users"></ul>
+                </div>
+                <div class="connected-playes col-lg-8">
+                    <ul id = "connected_users"></ul>
+                </div>
+                <div class="leaderboard col-lg-4">
+                    <ul id = "leaderboard-players"></ul>
+                </div>
             </div>
         </div>
+
+
     </div>
 
 </div>
@@ -47,8 +54,8 @@
 
 
 <script>
-    var socket = io.connect('http://localhost:3000');
-    //var socket = io.connect('http://104.197.49.207:3000');
+    //var socket = io.connect('http://localhost:3000');
+   var socket = io.connect('http://104.197.49.207:3000');
     socket.emit("add-user", {"username": "mainScreen"});
 
 
@@ -98,7 +105,14 @@
 
     function getScore() {
         $.getJSON("../DB/JsonAPI.php", {functionName: "getScore"}, function (data) {
-            console.log("score fetched!");
+            //console.log(data);
+            for(var i in data){
+                var lPlayer = $("<li class='players' id='"+ data[i].user_id + "'>" + "<div class='pname col-md-7'>" + data[i].user_name + "</div>" + "<div class='pimage col-md-3'>" +"<img src='"+ data[i].img_src +"' class='img-circle'>"+ "</div>" + "<div class='pscore col-md-2'>" + data[i].top_score + "</div>" + "</li>");
+                $("#leaderboard-players").append(lPlayer,null);
+                //console.log(data[i].user_id);
+                //console.log(lPlayer);
+            }
+
         });
     }
 
