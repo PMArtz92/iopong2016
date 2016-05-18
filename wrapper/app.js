@@ -124,7 +124,7 @@ io.sockets.on('connection', function (socket) {
         userIdArray.push(data.userId);
 
         // send main screen to user
-        io.sockets.connected[control_client["mainScreen"].socket].emit("add-connected", {
+        io.emit("mainScreen-add-connected", {
           "username": data.username,
           "userId": data.userId,
           "img": data.img
@@ -150,7 +150,7 @@ io.sockets.on('connection', function (socket) {
       if(clients[userId].socket === socket.id) {
 
         // send socket id to main screen to remove item
-        io.sockets.connected[control_client["mainScreen"].socket].emit("remove-connected", {"userId":userId});
+        io.emit("mainScreen-remove-connected", {"userId":userId});
 
         delete clients[userId];
 
@@ -239,7 +239,7 @@ io.sockets.on('connection', function (socket) {
     console.log("Selecting ......");
 
     // trigger main screen state change
-    io.sockets.connected[control_client["mainScreen"].socket].emit("stateChange", "load_player_selecting_screen");
+    io.emit("mainScreen-stateChange", "load_player_selecting_screen");
 
     //marge previous  players
     userIdArray = userIdArray.concat(selectedUserIdArray);
@@ -255,7 +255,7 @@ io.sockets.on('connection', function (socket) {
   // out and send player to screen  change notification
 
   function selectPlayer1(){
-    io.sockets.connected[control_client["mainScreen"].socket].emit("stateChange", "selecting player 1");
+    io.emit("mainScreen-stateChange", "selecting player 1");
 
 
     if (checkPlayers()){
@@ -266,7 +266,7 @@ io.sockets.on('connection', function (socket) {
 
 
       // show selected players in main screen
-      io.sockets.connected[control_client["mainScreen"].socket].emit("showSelectedPlayers",
+      io.emit("mainScreen-showSelectedPlayers",
           {"player1":clients[player1_user_id].username});
 
       // send players to notification
@@ -292,7 +292,7 @@ io.sockets.on('connection', function (socket) {
       console.log("player 2 socket id" + player2_socket_id);
 
       // show selected players in main screen
-      io.sockets.connected[control_client["mainScreen"].socket].emit("showSelectedPlayers",
+      io.emit("mainScreen-showSelectedPlayers",
           {"player2":clients[player2_user_id].username});
 
       // send players to notification
@@ -311,7 +311,7 @@ io.sockets.on('connection', function (socket) {
     if (userIdArray.length > 0){
       return true ;
     } else{
-      io.sockets.connected[control_client["mainScreen"].socket].emit("stateChange", "No Players in the pool");
+      io.emit("mainScreen-stateChange", "No Players in the pool");
       return false ;
     }
 
@@ -341,7 +341,7 @@ io.sockets.on('connection', function (socket) {
     player1confirm = true;
 
     var tempuser1 = clients[player1_user_id];
-    io.sockets.connected[control_client["mainScreen"].socket].emit("player1confirm", {"username":tempuser1.username,"userId":tempuser1.userId,"img":tempuser1.img});
+    io.emit("mainScreen-player1confirm", {"username":tempuser1.username,"userId":tempuser1.userId,"img":tempuser1.img});
     io.sockets.connected[player1_socket_id].emit("notification", "player1Ok");
     clearTimeout(player1timeOut);
     startGame();
@@ -351,7 +351,7 @@ io.sockets.on('connection', function (socket) {
   function player2Confirm(){
     player2confirm = true;
     var tempuser2 = clients[player2_user_id];
-    io.sockets.connected[control_client["mainScreen"].socket].emit("player2confirm", {"username":tempuser2.username,"userId":tempuser2.userId,"img":tempuser2.img});
+    io.emit("mainScreen-player2confirm", {"username":tempuser2.username,"userId":tempuser2.userId,"img":tempuser2.img});
     io.sockets.connected[player2_socket_id].emit("notification", "player2Ok");
     clearTimeout(player2timeOut);
     startGame();
@@ -359,12 +359,12 @@ io.sockets.on('connection', function (socket) {
   }
 
   function player1Reject(){
-    io.sockets.connected[control_client["mainScreen"].socket].emit("stateChange", "Player_1_Reject");
+    io.emit("mainScreen-stateChange", "Player_1_Reject");
     selectPlayer1();
   }
 
   function player2Reject(){
-    io.sockets.connected[control_client["mainScreen"].socket].emit("stateChange", "Player_2_Reject");
+    io.emit("mainScreen-stateChange", "Player_2_Reject");
     selectPlayer2();
   }
 
@@ -376,7 +376,7 @@ io.sockets.on('connection', function (socket) {
       var tempuser1 = clients[player1_user_id];
       var tempuser2 = clients[player2_user_id];
 
-      io.sockets.connected[control_client["gameScreen"].socket].emit("load_Game", [{"username":tempuser1.username,"userId":tempuser1.userId,"img":tempuser1.img},{"username":tempuser2.username,"userId":tempuser2.userId,"img":tempuser2.img}]);
+      io.emit("gameScreen-load_Game", [{"username":tempuser1.username,"userId":tempuser1.userId,"img":tempuser1.img},{"username":tempuser2.username,"userId":tempuser2.userId,"img":tempuser2.img}]);
       //io.sockets.connected[control_client["gameScreen"].socket].emit("stateChange", "load_Game");
     }
 
@@ -388,7 +388,7 @@ io.sockets.on('connection', function (socket) {
 
   function endGame(){
     // trigger main screen state change
-    io.sockets.connected[control_client["mainScreen"].socket].emit("stateChange", "load game lobby ");
+    io.emit("mainScreen-stateChange", "load game lobby ");
 
 
     //change the player screen
@@ -397,7 +397,7 @@ io.sockets.on('connection', function (socket) {
     io.sockets.connected[player2_socket_id].emit("notification", "game finished");
 
     //change game screen
-    io.sockets.connected[control_client["gameScreen"].socket].emit("stateChange", "load_QR_code");
+    io.emit("gameScreen-stateChange", "load_QR_code");
 
   }
 
