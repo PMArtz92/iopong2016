@@ -14,10 +14,23 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-5">
-            <button class="btn btn-danger btn-lg">Start</button>
+            <button class="btn btn-danger btn-lg" id="selectPlayers">Start</button>
             <button class="btn btn-success btn-lg">End</button>
         </div>
     </div>
 </div>
 </body>
+
+<script>
+    var socket = io.connect('http://104.197.49.207:3000');
+
+    $("#selectPlayers").on("click", function(){
+        socket.emit("buttonClickEvent","selectPlayers");
+        console.log("selectPlayers");
+        return false;
+    });
+
+
+
+</script>
 </html>
