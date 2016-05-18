@@ -57,8 +57,23 @@
 
 <script>
 
+<<<<<<< HEAD
    var socket = io.connect('http://localhost:3000');
     // var socket = io.connect('http://104.197.49.207:3000');
+=======
+   //var socket = io.connect('http://localhost:3000');
+
+
+   var playerId ;
+
+   //game control server
+   var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
+
+   var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
+
+//   socket.on('connect',console.log('A connected'));
+//   socket2.on('connect',console.log('B connected'));
+>>>>>>> 30e6b861ac9bc959c859e3b21db9f958f2425da2
 
     function onSuccess(googleUser) {
         console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -120,32 +135,40 @@
    downButton1.addEventListener("touchstart", downButtonPress, false);
    downButton1.addEventListener("touchend", downButtonRelease, false);
 
+   //change socket --> socket2
+
     function upButtonPress(e){
        e.preventDefault();
-        socket.emit("click_function", "UpPress");
-        //var coords = document.getElementById("text01");
-        //coords.innerHTML  = "1 atha ariya";
+        socket2.emit("click_function", (1 * playerId));
+        var coords = document.getElementById("text01");
+        coords.innerHTML  = "1 atha ariya";
    }
 
    function upButtonRelease(e){
        e.preventDefault();
-       socket.emit("click_function", "UpRelease");
-       //var coords = document.getElementById("text01");
-       //coords.innerHTML  = "2 atha ariya";
+
+       socket2.emit("click_function", (2 * playerId));
+       var coords = document.getElementById("text01");
+       coords.innerHTML  = "2 atha ariya";
+
    }
 
    function downButtonPress(e){
        e.preventDefault();
-       socket.emit("click_function", "DownPress");
-       //var coords = document.getElementById("text01");
-       //coords.innerHTML  = "3 atha ariya";
+
+       socket2.emit("click_function", (3 * playerId));
+       var coords = document.getElementById("text01");
+       coords.innerHTML  = "3 atha ariya";
+
    }
 
    function downButtonRelease(e){
        e.preventDefault();
-       socket.emit("click_function", "DownRelease");
-       //var coords = document.getElementById("text01");
-       //coords.innerHTML  = "4 atha ariya";
+
+       socket2.emit("click_function", (4 * playerId));
+       var coords = document.getElementById("text01");
+       coords.innerHTML  = "4 atha ariya";
+
    }
 
 
@@ -165,8 +188,13 @@
         console.log(data);
         if (data == "confirm"){
             playerConfirm();
-        }else{
-            alert(data);
+        }else if (data == "player1Ok"){
+            playerId = 1;
+            alert("Pasan control load karapan player 1");
+        }else if(data == "player2Ok"){
+            playerId = 5;
+            alert("Pasan control load karapan player 2");
+
         }
 
     });
