@@ -148,7 +148,9 @@
 
           });
 
-          socket.on("load_Game", function (data) {
+          socket.on("gameScreen-load_Game", function (data) {
+              console.log(data);
+
               gameCommence(data);
               $('#qrCode').addClass('hidden');
               $('#pong-game-board').removeClass('hidden');
