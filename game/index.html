@@ -30,8 +30,8 @@
   </div>-->
 <div class="container-fluid">
     <div class="game-play-area">
-        <div class="row">
-            <div id="gamePlay">
+        <div class="row hidden" id="pong-game-board">
+            <div id="gamePlay" >
                 <canvas id="game">
                     <div id="unsupported">
                         Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
@@ -76,9 +76,7 @@
 
 </div>
 
-<script>
-    $('#qrCode').hide();
-</script>
+
 
   <script src="game.js" type="text/javascript"></script> 
   <script src="pong.js" type="text/javascript"></script>
@@ -108,9 +106,7 @@
 
 
     // add user name when connected to the game serve
-    $('#st1').click(function(){
-        document.dispatchEvent(new CustomEvent("gameStart"));
-    });
+
     socket2.on("game_control_data", function(data){
 
       console.log(data.pressedKey);
@@ -149,7 +145,17 @@
 
     });
 
+          socket.on("load_Game", function(data){
+              gameCommence(data);
+              $('#qrCode').addClass('hidden');
+              $('#pong-game-board').removeClass('hidden',function(){
+                  document.dispatchEvent(new CustomEvent("gameStart"));
+              });
+          });
+
     socket.on("stateChange", function(data){
+    socket.on("gameScreen-stateChange", function(data){
+
       console.log(data);
 
     });
@@ -167,6 +173,16 @@
 
       var coords = document.getElementById("pong-player01");
       coords.innerHTML  = 'Pasan';
+
+
+      function gameCommence(data) {
+          var i;
+          for(i = 0; i < data.length; i++) {
+              $.getJSON("../DB/JsonAPI.php", {functionName: "setPlayer", user_id: data[i].userId, user_name: data[i].username, img_src: data[i].img, orientation: i+1}, function (data) {
+                  console.log("database updated!");
+              });
+          }
+      }
   </script>
 
 

@@ -19,8 +19,8 @@
 <script src="../js/socket.io.js"></script>
 
 <script>
-var socket = io.connect('http://localhost:3000');
-    //var socket = io.connect('http://104.197.49.207:3000');
+//var socket = io.connect('http://localhost:3000');
+    var socket = io.connect('http://104.197.49.207:3000');
 
     socket.emit("add-user", {"username": "gameScreen"});
 
@@ -44,6 +44,8 @@ var socket = io.connect('http://localhost:3000');
 //    });
 
 
+
+
     socket.on("stateChange", function(data){
         console.log(data);
 
@@ -55,6 +57,8 @@ var socket = io.connect('http://localhost:3000');
         console.log("end Game");
         return false;
     });
+
+
 
 
 </script>

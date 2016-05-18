@@ -1,0 +1,7 @@
+Time : 09:44:12
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AS top_score) FROM `user_score` LIMIT 20' at line 1
+Raw SQL : SELECT (`user_id`, `user_name`, `img_src`, `score` AS top_score) FROM `user_score` LIMIT 20
+
+Time : 09:43:45
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'AS top_score) FROM `user_score` LIMIT 20' at line 1
+Raw SQL : SELECT (`user_id`, `user_name`, `img_src`, `score` AS top_score) FROM `user_score` LIMIT 20
