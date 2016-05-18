@@ -339,63 +339,6 @@ Game = {
   } // Game.Runner
 }
 
-//document.getElementById("up").onmousedown = ;
-//$( "#up" ).trigger( "mousedown", mouseDown1 );
-
-/*document.getElementById("up").onmousedown = function() {mouseDown1()};
-document.getElementById("up").onmouseup = function() {mouseUp1()};
-
-document.getElementById("down").onmousedown = function() {mouseDown2()};
-document.getElementById("down").onmouseup = function() {mouseUp2()};
-
-document.getElementById("st1").onmousedown = function() {mouseDown3()};
-document.getElementById("st1").onmouseup = function() {mouseUp3()};*/
-
-
-//
-//function mouseDown1() {
-//    p1 = 1;
-//
-//}
-//
-//function mouseUp1() {
-//    p1 = 0;
-//}
-//
-//function mouseDown2() {
-//    p1 = -1;
-//
-//}
-//
-//function mouseUp2() {
-//    p1 = 0;
-//}
-//
-//function mouseDown3() {
-//    p1 = 2;
-//}
-//
-//function mouseUp3() {
-//    p1 = 0;
-//}
-//
-///*$( "#up" ).click(function() {
-//
-//});*/
-//
-//$("#up").click(function(){
-//    mouseDown1();
-//});
-//
-//$( "#down" ).click(function() {
-//    mouseDown2();
-//});
-//
-//$('#st1').click(function(){
-//    mouseDown3();
-//});
-//
-
 
 
 

@@ -54,14 +54,14 @@
 
 
 <script>
-    var socket = io.connect('http://localhost:3000');
-    //var socket = io.connect('http://104.197.49.207:3000');
+    //var socket = io.connect('http://localhost:3000');
+    var socket = io.connect('http://104.197.49.207:3000');
     socket.emit("add-user", {"username": "mainScreen"});
 
 
     // add user name when connected to the game server
 
-    socket.on("add-connected", function(data){
+    socket.on("mainScreen-add-connected", function(data){
         var element = $("<li class='players' id='"+ data.userId + "'>" + "<div class='pname'>" +data.username + "</div>" + "<span class='pimage'>" +"<img src='"+data.img +"' class='img-circle'>"+ "</span>"+ "</li>");
         $("#connected_users").fadeOut(100,function(){
             $("#connected_users").append(element,null);
@@ -74,7 +74,7 @@
 
     // remove user name when disconnected form the game server
 
-    socket.on("remove-connected", function(data){
+    socket.on("mainScreen-remove-connected", function(data){
         console.log("Remove this item",data);
        // var id = data.toString();
         removeName(data.userId);
@@ -87,11 +87,11 @@
         return false;
     });
 
-    socket.on("stateChange", function(data){
+    socket.on("mainScreen-stateChange", function(data){
         console.log(data);
     });
 
-    socket.on("showSelectedPlayers", function(data){
+    socket.on("mainScreen-showSelectedPlayers", function(data){
         console.log("selected players",data);
     });
     var rr = document.getElementById('connected_users');

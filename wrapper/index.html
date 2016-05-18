@@ -65,9 +65,9 @@
    var playerId ;
 
    //game control server
-  // var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
+  var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
 
-  // var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
+  var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
 
 //   socket.on('connect',console.log('A connected'));
 //   socket2.on('connect',console.log('B connected'));
@@ -211,44 +211,6 @@
 
 
 </script>
-
-
-<!--
-    <script type="text/javascript">
-        $(function(){
-            $('.ripple').ripple({
-                color:'yellow',
-                time:'.8s'
-            });
-        });
-
-        $('#upButton').ripple({
-            color:'yellow',
-            time:'.8s'
-        })/*.mouseup(function() {
-            console.log("UP Release");
-            socket.emit("click_function", "UpRelease");
-
-            }).mousedown(function() {
-            console.log("UP press");
-            socket.emit("click_function", "UpPress");
-        })*/;
-
-
-        $('#downButton').ripple({
-            color:'white',
-            time:'.8s'
-        })/*.mouseup(function() {
-            console.log("Down Release");
-            socket.emit("click_function", "DownRelease");
-        }).mousedown(function() {
-            console.log("Down press");
-            socket.emit("click_function", "DownPress");
-
-        })*/;
-
-
-    </script>-->
 
 
 
