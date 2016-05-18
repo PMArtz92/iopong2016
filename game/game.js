@@ -266,10 +266,10 @@ Game = {
       if (this.cfg.stats) {
         ctx.fillStyle = 'white';
         ctx.font = '9pt sans-serif';
-        ctx.fillText("frame: "  + this.stats.count,         this.width - 100, this.height - 75);
-        ctx.fillText("fps: "    + this.stats.fps,           this.width - 100, this.height - 60);
-        ctx.fillText("update: " + this.stats.update + "ms", this.width - 100, this.height - 45);
-        ctx.fillText("draw: "   + this.stats.draw   + "ms", this.width - 100, this.height - 30);
+        //ctx.fillText("frame: "  + this.stats.count,         this.width - 100, this.height - 75);
+        //ctx.fillText("fps: "    + this.stats.fps,           this.width - 100, this.height - 60);
+        //ctx.fillText("update: " + this.stats.update + "ms", this.width - 100, this.height - 45);
+        //ctx.fillText("draw: "   + this.stats.draw   + "ms", this.width - 100, this.height - 30);
       }
     },
 

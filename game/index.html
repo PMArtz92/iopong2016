@@ -8,6 +8,10 @@
   <link href="pong.css" media="screen, print" rel="stylesheet" type="text/css" />
     <script src="jquery-1.12.3.js"></script>
     <script src="../js/socket.io.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+
 </head> 
  
 <body style="-webkit-touch-callout: none;
@@ -15,7 +19,7 @@
 
 
 
-  <div id="sidebar">
+<!--  <div id="sidebar">
 
     <h2>I/O  2016</h2>
 
@@ -23,13 +27,58 @@
         <button id="st1">Start</button>
     </div>
 
-  </div>
-  <canvas id="game">
-    <div id="unsupported">
-      Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
-    </div>
-  </canvas>
+  </div>-->
+<div class="container-fluid">
+    <div class="game-play-area">
+        <div class="row">
+            <div id="gamePlay">
+                <canvas id="game">
+                    <div id="unsupported">
+                        Sorry, this example cannot be run because your browser does not support the &lt;canvas&gt; element
+                    </div>
+                </canvas>
+            </div>
+            <div class="container" id="game-name-show">
+                <div class="col-lg-12">
+                    <div class="col-lg-offset-3 col-lg-3" id="pong-player01">
 
+                    </div>
+
+                    <div class="col-lg-offset-2 col-lg-3" id="pong-player02">
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div id="qrCode" class="qrCode">
+                <h1>QR</h1>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+<div class="container-fluid player-showoff hidden">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-6 player01" id="player01">
+            </div>
+            <div class="col-lg-6 player02" id="player02">
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    $('#qrCode').hide();
+</script>
 
   <script src="game.js" type="text/javascript"></script> 
   <script src="pong.js" type="text/javascript"></script>
@@ -43,48 +92,57 @@
           Game.start('game', Pong);
           G = Game;
 
-
-
     //var socket = io.connect('http://localhost:3000');
-          var socket = io.connect('http://104.197.49.207:3000');
-    socket.emit("add-user", {"username": "gameScreen"});
+
+          //game control server
+
+          //remove .connect
+          var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
+
+          var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
+
+          socket.emit("add-user", {"username": "gameScreen"});
+
+
+
+
 
     // add user name when connected to the game serve
     $('#st1').click(function(){
         document.dispatchEvent(new CustomEvent("gameStart"));
     });
-    socket.on("game_control_data", function(data){
+    socket2.on("game_control_data", function(data){
 
       console.log(data.pressedKey);
       //document.dispatchEvent(new CustomEvent("p1DownPress"));
-        if(data.pressedKey == 'p1DownPress'){
+        if(data.pressedKey == 3){
             document.dispatchEvent(new CustomEvent("p1DownPress"));
         }
-        else if(data.pressedKey == 'p1DownRelease'){
+        else if(data.pressedKey == 4){
             document.dispatchEvent(new CustomEvent("p1DownRelease"));
             console.log('sdkjhf');
         }
-        else if(data.pressedKey == 'p1UpPress'){
+        else if(data.pressedKey == 1){
             document.dispatchEvent(new CustomEvent("p1UpPress"));
             console.log('ttt');
         }
-        else if(data.pressedKey == 'p1UpRelease'){
+        else if(data.pressedKey == 2){
             document.dispatchEvent(new CustomEvent("p1UpRelease"));
             console.log('ttt');
         }
-        else if(data.pressedKey == 'p2UpPress'){
+        else if(data.pressedKey == 5){
             document.dispatchEvent(new CustomEvent("p2UpPress"));
             console.log('a1');
         }
-        else if(data.pressedKey == 'p2UpRelease'){
+        else if(data.pressedKey == 10){
             document.dispatchEvent(new CustomEvent("p2UpRelease"));
             console.log('a2');
         }
-        else if(data.pressedKey == 'p2DownPress'){
+        else if(data.pressedKey == 15){
             document.dispatchEvent(new CustomEvent("p2DownPress"));
             console.log('ttt');
         }
-        else if(data.pressedKey == 'p2DownRelease'){
+        else if(data.pressedKey == 20){
             document.dispatchEvent(new CustomEvent("p2DownRelease"));
             console.log('ttt');
         }
@@ -103,6 +161,12 @@
     });
 
       });
+
+      var playerName = [{userId:"12", userName:"Doe", img:"oonsdf/234"}, {userId:"122", userName:"Kate", img:"oon/234"}];
+     // $('#pong-player01').append(playerName.userName);
+
+      var coords = document.getElementById("pong-player01");
+      coords.innerHTML  = 'Pasan';
   </script>
 
 
