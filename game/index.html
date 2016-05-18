@@ -148,12 +148,19 @@
 
           });
 
-          socket.on("load_Game", function (data) {
+          socket.on("gameScreen-load_Game", function (data) {
+              console.log(data);
+
               gameCommence(data);
               $('#qrCode').addClass('hidden');
-              $('#pong-game-board').removeClass('hidden', function () {
+              $('#pong-game-board').removeClass('hidden');
+
+              setTimeout(function() {
                   document.dispatchEvent(new CustomEvent("gameStart"));
-              });
+                  console.log("game start call");
+              }, 5000);
+
+
           });
 
           socket.on("gameScreen-stateChange", function (data) {

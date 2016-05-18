@@ -398,7 +398,7 @@ io.sockets.on('connection', function (socket) {
       var tempuser1 = clients[player1_user_id];
       var tempuser2 = clients[player2_user_id];
 
-      io.emit("gameScreen-load_Game", [{"username":tempuser1.username,"userId":tempuser1.userId,"img":tempuser1.img},{"username":tempuser2.username,"userId":tempuser2.userId,"img":tempuser2.img}]);
+      io.emit("gameScreen-load_Game", [{"username":tempuser1.username,"userId":player1_user_id,"img":tempuser1.img},{"username":tempuser2.username,"userId":player2_user_id,"img":tempuser2.img}]);
       //io.sockets.connected[control_client["gameScreen"].socket].emit("stateChange", "load_Game");
     }
 
