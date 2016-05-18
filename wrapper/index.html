@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width,height=device-height,initial-scale=1.0"/>
   <title>Controller</title>
 
-    <link href="/iopong2016/css/bootstrap-theme.css" rel="stylesheet" type="text/css">
-    <link href="/iopong2016/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/bootstrap-theme.css" rel="stylesheet" type="text/css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
 
-    <link href="/iopong2016/css/iopong.css" rel="stylesheet" type="text/css">
+    <link href="../css/iopong.css" rel="stylesheet" type="text/css">
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="/iopong2016/js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </head>
 <body style="-webkit-touch-callout: none;
 -webkit-user-select: none;">
@@ -21,13 +22,19 @@
     <!--<button type="button" id="downButton">Down</button>-->
 <!--</div>-->
 <div class="container player-controlls">
-    <div class="">
-        <div id = "upButton"  class="col-lg-12 player-upButton"></div>
+    <div id="player-keys" class="player-keys">
+        <div class="upBtn">
+            <div id = "upButton"  class="player-upButton"></div>
+        </div>
+        <div class="">
+            <div id = "downButton" class="col-lg-12 player-downButton"></div>
+        </div>
     </div>
-    <div class="">
-        <div id = "downButton" class="col-lg-12 player-downButton"></div>
-    </div>
-    <div id="text01">
+
+
+
+    <div id="player-signin" class="col-lg-12">
+        <div id="my-signin2" class="col-lg-offset-4"></div>
     </div>
 </div>
 
@@ -42,16 +49,16 @@
 
 <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <!--<script src="http://localhost:3000/socket.io/socket.io.js"></script>-->
-<script src="/iopong2016/js/socket.io.js"></script>
+<script src="../js/socket.io.js"></script>
 
-<script src="/iopong2016/js/ripple.min.js"></script>
+<script src="../js/ripple.min.js"></script>
 
 
-<div id="my-signin2"></div>
+
 <script>
 
-   //var socket = io.connect('http://localhost:3000');
-     var socket = io.connect('http://104.197.49.207:3000');
+   var socket = io.connect('http://localhost:3000');
+    // var socket = io.connect('http://104.197.49.207:3000');
 
     function onSuccess(googleUser) {
         console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -60,6 +67,8 @@
 
         socket.emit("add-user", {"username": googleUser.getBasicProfile().getName(), "img": googleUser.getBasicProfile().getImageUrl(), "userId": googleUser.getBasicProfile().getId(), "email": googleUser.getBasicProfile().getEmail()});
 
+        playerSigned();
+
     }
     function  onFailure(error) {
         console.log(error);
@@ -67,8 +76,8 @@
     function renderButton() {
         gapi.signin2.render('my-signin2', {
             'scope': 'profile email',
-            'width': 240,
-            'height':50,
+            'width': 350,
+            'height':75,
             'longtitle': true,
             'theme': 'dark',
             'onsuccess': onSuccess,
@@ -76,6 +85,10 @@
         });
     }
 
+   function playerSigned(){
+       $('#player-signin').fadeOut(500).addClass('hidden');
+       $('#player-keys').removeClass('hidden').hide().fadeIn(500);
+   }
    function absorbEvent_(event) {
        var e = event || window.event;
        e.preventDefault && e.preventDefault();
@@ -110,29 +123,29 @@
     function upButtonPress(e){
        e.preventDefault();
         socket.emit("click_function", "UpPress");
-        var coords = document.getElementById("text01");
-        coords.innerHTML  = "1 atha ariya";
+        //var coords = document.getElementById("text01");
+        //coords.innerHTML  = "1 atha ariya";
    }
 
    function upButtonRelease(e){
        e.preventDefault();
        socket.emit("click_function", "UpRelease");
-       var coords = document.getElementById("text01");
-       coords.innerHTML  = "2 atha ariya";
+       //var coords = document.getElementById("text01");
+       //coords.innerHTML  = "2 atha ariya";
    }
 
    function downButtonPress(e){
        e.preventDefault();
        socket.emit("click_function", "DownPress");
-       var coords = document.getElementById("text01");
-       coords.innerHTML  = "3 atha ariya";
+       //var coords = document.getElementById("text01");
+       //coords.innerHTML  = "3 atha ariya";
    }
 
    function downButtonRelease(e){
        e.preventDefault();
        socket.emit("click_function", "DownRelease");
-       var coords = document.getElementById("text01");
-       coords.innerHTML  = "4 atha ariya";
+       //var coords = document.getElementById("text01");
+       //coords.innerHTML  = "4 atha ariya";
    }
 
 
@@ -142,24 +155,6 @@
 <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 
 
-<!--<script>-->
-    <!--$( "p" )-->
-            <!--.mouseup(function() {-->
-                <!--$( this ).append( "<span style='color:#f00;'>Mouse up.</span>" );-->
-            <!--})-->
-            <!--.mousedown(function() {-->
-                <!--$( this ).append( "<span style='color:#00f;'>Mouse down.</span>" );-->
-            <!--});-->
-
-
-    <!--$("#upButton").preventDefault() .mouseup(function() {-->
-            <!--$( "#tempp" ).append( "<span style='color:#f00;'>Mouse up.</span>" );-->
-            <!--})-->
-            <!--.mousedown(function() {-->
-                <!--$( "#tempp" ).append( "<span style='color:#00f;'>Mouse down.</span>" );-->
-            <!--});-->
-
-<!--</script>-->
 
 
 <script>
@@ -176,18 +171,6 @@
 
     });
 
-//
-//    $("#upButton").on("click", function(){
-//        socket.emit("click_function", "UP");
-//        console.log("click Up");
-//        return false;
-//    });
-//
-//    $("#downButton").on("click", function(){
-//        socket.emit("click_function", "DOWN");
-//        console.log("click Down");
-//        return false;
-//    });
 
 
 
@@ -205,7 +188,7 @@
 </script>
 
 
-
+<!--
     <script type="text/javascript">
         $(function(){
             $('.ripple').ripple({
@@ -240,7 +223,7 @@
         })*/;
 
 
-    </script>
+    </script>-->
 
 
 

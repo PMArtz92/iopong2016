@@ -20,8 +20,8 @@ Pong = {
 
   Colors: {
     walls:           'white',
-    ball:            'white',
-    score:           'white',
+    ball:            '#eeb211',
+    //score:           'white',
     predictionGuess: 'yellow',
     predictionExact: 'red'
   },
