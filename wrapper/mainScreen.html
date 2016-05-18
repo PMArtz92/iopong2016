@@ -103,6 +103,8 @@
         });
     }
 
+    setInterval(getScore, 5000);
+
     function getScore() {
         $.getJSON("../DB/JsonAPI.php", {functionName: "getScore"}, function (data) {
             //console.log(data);
