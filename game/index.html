@@ -154,7 +154,13 @@
               gameCommence(data);
               $('#qrCode').addClass('hidden');
               $('#pong-game-board').removeClass('hidden');
-              document.dispatchEvent(new CustomEvent("gameStart"));
+
+              setTimeout(function() {
+                  document.dispatchEvent(new CustomEvent("gameStart"));
+                  console.log("game start call");
+              }, 5000);
+
+
           });
 
           socket.on("gameScreen-stateChange", function (data) {
