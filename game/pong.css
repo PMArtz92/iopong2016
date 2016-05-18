@@ -67,7 +67,7 @@ body { background-color: #212121 !important; color: #fff; font-size: 12pt; paddi
 /*-------------------------- Player Area -------------------------------*/
 
 
-.pong-player01 ul li{
+.pong-player01 .pong01 li{
     list-style: none;
     background-color: #f7f7f7;
     -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
@@ -165,4 +165,15 @@ body { background-color: #212121 !important; color: #fff; font-size: 12pt; paddi
     color: #fff;
     background-color: #009925 ;
 
+}
+
+.pong-player01 .pong02 li{
+    list-style: none;
+    background-color: #f7f7f7;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    margin: 5px;
+    max-width: 400px;
+    min-height: 75px;
 }

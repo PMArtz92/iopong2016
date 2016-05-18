@@ -145,7 +145,7 @@
               gameCommence(data);
               var player01 = $("<li class='players' id='"+ data[0].userId + "'>" + "<div class='pname'>" +data[0].username + "</div>" + "<span class='pimage'>" +"<img src='"+data[0].img +"' class='img-circle'>"+ "</span>"+ "</li>");
 
-              var player02 = $("<li class='players' id='"+ data[0].userId + "'>" + "<div class='pname'>" +data[0].username + "</div>" + "<span class='pimage'>" +"<img src='"+data[0].img +"' class='img-circle'>"+ "</span>"+ "</li>");
+              var player02 = $("<li class='players' id='"+ data[1].userId + "'>" + "<div class='pname'>" +data[1].username + "</div>" + "<span class='pimage'>" +"<img src='"+data[1].img +"' class='img-circle'>"+ "</span>"+ "</li>");
 
               $("#pong-player01").empty().append(player01,null);
               $("#pong-player02").empty().append(player02,null);
