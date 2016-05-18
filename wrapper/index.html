@@ -56,7 +56,7 @@
 
 
 <script>
-    
+
    var socket = io.connect('http://localhost:3000');
     // var socket = io.connect('http://104.197.49.207:3000');
    //var socket = io.connect('http://localhost:3000');
@@ -65,9 +65,9 @@
    var playerId ;
 
    //game control server
-   var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
+  // var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
 
-   var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
+  // var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
 
 //   socket.on('connect',console.log('A connected'));
 //   socket2.on('connect',console.log('B connected'));
