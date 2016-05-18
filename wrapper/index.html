@@ -56,10 +56,6 @@
 
 
 <script>
-    $(document).on("click", ".alert", function(e) {
-        bootbox.confirm("Hello world!", function(result) {
-            console.log(result);
-        });
 
         setTimeout(function() {
             // that's enough of that
@@ -124,6 +120,7 @@
 
    function load_control(){
        $('#load-controls').load("control.html");
+       console.log('pasan awooo');
 
    }
 
