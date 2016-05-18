@@ -106,7 +106,7 @@ Pong = {
     this.scores[playerNo] += 1;
     if (this.scores[playerNo] == 9) {
         this.menu.declareWinner(playerNo);
-        //this.updateScore();
+        this.updateScore();
         this.stop();
     }
     else {
@@ -138,6 +138,14 @@ Pong = {
       this.ball.draw(ctx);
     else
       this.menu.draw(ctx);
+  },
+
+  updateScore: function () {
+    var p1_score = this.scores[0];
+    var p2_score = this.scores[1];
+    $.getJSON("../DB/JsonAPI.php", {functionName: "setScore", p1_score: p1_score, p2_score: p2_score}, function (data) {
+      console.log("DB Score updated");
+    });
   },
 
   onkeydown: function(keyCode) {
@@ -192,6 +200,7 @@ Pong = {
       else if (this.winner == 1)
         ctx.drawImage(this.winner2.image, this.winner2.x, this.winner2.y);
     }
+
 
   },
 
