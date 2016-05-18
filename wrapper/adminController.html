@@ -3,11 +3,14 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="../js/socket.io.js"></script>
     <script src="../js/bootstrap.js"></script>
     <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+
     <link href="../css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+
 
 </head>
 <body>
@@ -15,7 +18,7 @@
     <div class="row">
         <div class="col-lg-5">
             <button class="btn btn-danger btn-lg" id="selectPlayers">Start</button>
-            <button class="btn btn-success btn-lg">End</button>
+            <button class="btn btn-success btn-lg" id="endGame">End</button>
         </div>
     </div>
 </div>
@@ -31,6 +34,15 @@
     });
 
 
+    $("#endGame").on("click", function(){
+        socket.emit("buttonClickEvent","endGame");
+        console.log("end Game");
+        return false;
+    });
+
+
 
 </script>
 </html>
+
+

@@ -36,6 +36,9 @@
     <div id="load-controls">
 
     </div>
+    <div id="game-end-text hidden">
+        <h1>Thank You For Playin I/O Pong 2016</h1>
+    </div>
 </div>
 
 
@@ -133,7 +136,7 @@
        $('#load-controls').empty();
        $('#load-controls').innerHTML = "Pelase wait till your turn comes..";
        $('#load-controls').load("/iopong2016/wrapper/control.html");
-       console.log('pasan awooo');
+       //console.log('pasan awooo');
 
    }
 
@@ -168,6 +171,15 @@
             playerId = 5;
             //alert("Pasan control load karapan player 2");
             load_control();
+        }
+
+    });
+
+    socket.on("end_game", function (data) {
+        if(data == 'game finished'){
+            $('#load-controls').addClass('hidden');
+            $('#game-end-text').removeClass('hidden');
+
         }
 
     });

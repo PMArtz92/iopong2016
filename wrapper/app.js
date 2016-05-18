@@ -185,9 +185,6 @@ io.sockets.on('connection', function (socket) {
     }else if (data == "endGame"){
       endGame();
     }
-
-
-
   });
 
 
@@ -399,9 +396,9 @@ io.sockets.on('connection', function (socket) {
 
     //change the player screen
       try{
-          io.sockets.connected[player1_socket_id].emit("notification", "game finished");
+          io.sockets.connected[player1_socket_id].emit("end_game", "game finished");
 
-          io.sockets.connected[player2_socket_id].emit("notification", "game finished");
+          io.sockets.connected[player2_socket_id].emit("end_game", "game finished");
       }
       catch (err){
           console.log(err);

@@ -56,7 +56,7 @@
         <div class="row">
             <div id="qrCode" class="col-lg-12 qrCode">
                 <script>
-                    $('#qrCode').load('../wrapper/qr.html');
+                    $('#qrCode').load('/iopong2016/wrapper/qr.html');
                 </script>
             </div>
         </div>
@@ -162,9 +162,14 @@
           });
 
           socket.on("gameScreen-stateChange", function (data) {
-              console.log(data);
+              if(data == 'load_QR_code'){
+                  $('#pong-game-board').addClass('hidden');
+                  $('#qrCode').removeClass('hidden');
+              }
 
           });
+
+
 
           $("#endGame").on("click", function () {
               socket.emit("buttonClickEvent", "endGame");
