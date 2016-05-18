@@ -105,7 +105,14 @@
 
     function getScore() {
         $.getJSON("../DB/JsonAPI.php", {functionName: "getScore"}, function (data) {
-            console.log("score fetched!");
+            //console.log(data);
+            for(var i in data){
+                var lPlayer = $("<li class='players' id='"+ data[i].user_id + "'>" + "<div class='pname'>" + data[i].user_name + "</div>" + "<span class='pimage'>" +"<img src='"+ data[i].img_src +"' class='img-circle'>"+ "</span>" + "<div class='pscore'>" + data[i].top_score + "</div>" + "</li>");
+                $("#leaderboard-players").append(lPlayer,null);
+                //console.log(data[i].user_id);
+                //console.log(lPlayer);
+            }
+
         });
     }
 

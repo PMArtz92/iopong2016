@@ -34,7 +34,7 @@ function getScore(){
     global $db;
     $db->beginTransaction();
 
-    $score = $db->query("SELECT * FROM `user_score` LIMIT 20");
+    $score = $db->query("SELECT `user_id`, `user_name`, `img_src`, `score` AS top_score FROM `user_score` LIMIT 20");
 
     $db->commit();
     return json_encode($score);
