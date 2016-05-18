@@ -51,7 +51,10 @@
 <script>
 
    //var socket = io.connect('http://localhost:3000');
-     var socket = io.connect('http://104.197.49.207:3000');
+   var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
+
+   //game control server
+   var socket2 = io.connect('http://104.197.208.250:3030',{resource: 'socket2/socket.io', 'force new connection': true});
 
     function onSuccess(googleUser) {
         console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
@@ -107,30 +110,32 @@
    downButton1.addEventListener("touchstart", downButtonPress, false);
    downButton1.addEventListener("touchend", downButtonRelease, false);
 
+   //change socket --> socket2
+
     function upButtonPress(e){
        e.preventDefault();
-        socket.emit("click_function", "UpPress");
+        socket2.emit("click_function", "UpPress");
         var coords = document.getElementById("text01");
         coords.innerHTML  = "1 atha ariya";
    }
 
    function upButtonRelease(e){
        e.preventDefault();
-       socket.emit("click_function", "UpRelease");
+       socket2.emit("click_function", "UpRelease");
        var coords = document.getElementById("text01");
        coords.innerHTML  = "2 atha ariya";
    }
 
    function downButtonPress(e){
        e.preventDefault();
-       socket.emit("click_function", "DownPress");
+       socket2.emit("click_function", "DownPress");
        var coords = document.getElementById("text01");
        coords.innerHTML  = "3 atha ariya";
    }
 
    function downButtonRelease(e){
        e.preventDefault();
-       socket.emit("click_function", "DownRelease");
+       socket2.emit("click_function", "DownRelease");
        var coords = document.getElementById("text01");
        coords.innerHTML  = "4 atha ariya";
    }

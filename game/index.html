@@ -47,13 +47,22 @@
 
     //var socket = io.connect('http://localhost:3000');
           var socket = io.connect('http://104.197.49.207:3000');
-    socket.emit("add-user", {"username": "gameScreen"});
+
+          socket.emit("add-user", {"username": "gameScreen"});
+
+          //game control server
+          var socket2 = io.connect('http://104.197.208.250:3030',{resource: 'socket2/socket.io', 'force new connection': true});
+
+
+
+
+
 
     // add user name when connected to the game serve
     $('#st1').click(function(){
         document.dispatchEvent(new CustomEvent("gameStart"));
     });
-    socket.on("game_control_data", function(data){
+    socket2.on("game_control_data", function(data){
 
       console.log(data.pressedKey);
       //document.dispatchEvent(new CustomEvent("p1DownPress"));
