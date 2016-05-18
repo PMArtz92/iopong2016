@@ -7,7 +7,7 @@ $functionName    =   $_GET["functionName"];
 function setPlayer(){
     global $db;
     $db->beginTransaction();
-    $user_id = $_GET['user_id'];
+    $user_id = (string)$_GET['user_id'];
     $user_name = $_GET['user_name'];
     $img_src = $_GET['img_src'];
     $orientation = $_GET['orientation'];
