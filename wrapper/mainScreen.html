@@ -55,7 +55,7 @@
 
 <script>
     //var socket = io.connect('http://localhost:3000');
-    var socket = io.connect('http://104.197.49.207:3000');
+   var socket = io.connect('http://104.197.49.207:3000');
     socket.emit("add-user", {"username": "mainScreen"});
 
 
@@ -107,7 +107,7 @@
         $.getJSON("../DB/JsonAPI.php", {functionName: "getScore"}, function (data) {
             //console.log(data);
             for(var i in data){
-                var lPlayer = $("<li class='players' id='"+ data[i].user_id + "'>" + "<div class='pname'>" + data[i].user_name + "</div>" + "<span class='pimage'>" +"<img src='"+ data[i].img_src +"' class='img-circle'>"+ "</span>" + "<div class='pscore'>" + data[i].top_score + "</div>" + "</li>");
+                var lPlayer = $("<li class='players' id='"+ data[i].user_id + "'>" + "<div class='pname col-md-7'>" + data[i].user_name + "</div>" + "<div class='pimage col-md-3'>" +"<img src='"+ data[i].img_src +"' class='img-circle'>"+ "</div>" + "<div class='pscore col-md-2'>" + data[i].top_score + "</div>" + "</li>");
                 $("#leaderboard-players").append(lPlayer,null);
                 //console.log(data[i].user_id);
                 //console.log(lPlayer);

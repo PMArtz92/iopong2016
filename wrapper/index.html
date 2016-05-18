@@ -133,6 +133,8 @@
    downButton1.addEventListener("touchstart", downButtonPress, false);
    downButton1.addEventListener("touchend", downButtonRelease, false);
 
+   signButton.addEventListener("touchstart", signButtonPress, false);
+
    //change socket --> socket2
 
     function upButtonPress(e){
@@ -168,6 +170,11 @@
        coords.innerHTML  = "4 atha ariya";
 
    }
+
+    function signButtonPress(e){
+        e.preventDefault();
+        $('#my-signin2').trigger('click');
+    }
 
 
 

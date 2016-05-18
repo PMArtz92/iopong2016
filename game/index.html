@@ -90,86 +90,86 @@
           Game.start('game', Pong);
           G = Game;
 
-    //var socket = io.connect('http://localhost:3000');
+          //var socket = io.connect('http://localhost:3000');
 
           //game control server
 
           //remove .connect
-          var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
+          var socket2 = io.connect('http://104.197.201.110:3030', {
+              resource: 'socket2/socket.io',
+              'force new connection': true
+          });
 
-          var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
+          var socket = io.connect('http://104.197.49.207:3000', {
+              resource: 'socket/socket.io',
+              'force new connection': true
+          });
 
           socket.emit("add-user", {"username": "gameScreen"});
 
 
+          // add user name when connected to the game serve
 
+          socket2.on("game_control_data", function (data) {
 
+              console.log(data.pressedKey);
+              //document.dispatchEvent(new CustomEvent("p1DownPress"));
+              if (data.pressedKey == 3) {
+                  document.dispatchEvent(new CustomEvent("p1DownPress"));
+              }
+              else if (data.pressedKey == 4) {
+                  document.dispatchEvent(new CustomEvent("p1DownRelease"));
+                  console.log('sdkjhf');
+              }
+              else if (data.pressedKey == 1) {
+                  document.dispatchEvent(new CustomEvent("p1UpPress"));
+                  console.log('ttt');
+              }
+              else if (data.pressedKey == 2) {
+                  document.dispatchEvent(new CustomEvent("p1UpRelease"));
+                  console.log('ttt');
+              }
+              else if (data.pressedKey == 5) {
+                  document.dispatchEvent(new CustomEvent("p2UpPress"));
+                  console.log('a1');
+              }
+              else if (data.pressedKey == 10) {
+                  document.dispatchEvent(new CustomEvent("p2UpRelease"));
+                  console.log('a2');
+              }
+              else if (data.pressedKey == 15) {
+                  document.dispatchEvent(new CustomEvent("p2DownPress"));
+                  console.log('ttt');
+              }
+              else if (data.pressedKey == 20) {
+                  document.dispatchEvent(new CustomEvent("p2DownRelease"));
+                  console.log('ttt');
+              }
 
-    // add user name when connected to the game serve
+          });
 
-    socket2.on("game_control_data", function(data){
-
-      console.log(data.pressedKey);
-      //document.dispatchEvent(new CustomEvent("p1DownPress"));
-        if(data.pressedKey == 3){
-            document.dispatchEvent(new CustomEvent("p1DownPress"));
-        }
-        else if(data.pressedKey == 4){
-            document.dispatchEvent(new CustomEvent("p1DownRelease"));
-            console.log('sdkjhf');
-        }
-        else if(data.pressedKey == 1){
-            document.dispatchEvent(new CustomEvent("p1UpPress"));
-            console.log('ttt');
-        }
-        else if(data.pressedKey == 2){
-            document.dispatchEvent(new CustomEvent("p1UpRelease"));
-            console.log('ttt');
-        }
-        else if(data.pressedKey == 5){
-            document.dispatchEvent(new CustomEvent("p2UpPress"));
-            console.log('a1');
-        }
-        else if(data.pressedKey == 10){
-            document.dispatchEvent(new CustomEvent("p2UpRelease"));
-            console.log('a2');
-        }
-        else if(data.pressedKey == 15){
-            document.dispatchEvent(new CustomEvent("p2DownPress"));
-            console.log('ttt');
-        }
-        else if(data.pressedKey == 20){
-            document.dispatchEvent(new CustomEvent("p2DownRelease"));
-            console.log('ttt');
-        }
-
-    });
-
-          socket.on("load_Game", function(data){
+          socket.on("load_Game", function (data) {
               gameCommence(data);
               $('#qrCode').addClass('hidden');
-              $('#pong-game-board').removeClass('hidden',function(){
+              $('#pong-game-board').removeClass('hidden', function () {
                   document.dispatchEvent(new CustomEvent("gameStart"));
               });
           });
 
-    socket.on("stateChange", function(data){
-    socket.on("gameScreen-stateChange", function(data){
+          socket.on("gameScreen-stateChange", function (data) {
+              console.log(data);
 
-      console.log(data);
+          });
 
-    });
-
-    $("#endGame").on("click", function(){
-      socket.emit("buttonClickEvent","endGame");
-      console.log("end Game");
-      return false;
-    });
+          $("#endGame").on("click", function () {
+              socket.emit("buttonClickEvent", "endGame");
+              console.log("end Game");
+              return false;
+          });
 
       });
 
-      var playerName = [{userId:"12", userName:"Doe", img:"oonsdf/234"}, {userId:"122", userName:"Kate", img:"oon/234"}];
-     // $('#pong-player01').append(playerName.userName);
+
 
       var coords = document.getElementById("pong-player01");
       coords.innerHTML  = 'Pasan';
@@ -177,12 +177,19 @@
 
       function gameCommence(data) {
           var i;
-          for(i = 0; i < data.length; i++) {
-              $.getJSON("../DB/JsonAPI.php", {functionName: "setPlayer", user_id: data[i].userId, user_name: data[i].username, img_src: data[i].img, orientation: i+1}, function (data) {
+          for (i = 0; i < data.length; i++) {
+              $.getJSON("../DB/JsonAPI.php", {
+                  functionName: "setPlayer",
+                  user_id: data[i].userId,
+                  user_name: data[i].username,
+                  img_src: data[i].img,
+                  orientation: i + 1
+              }, function (data) {
                   console.log("database updated!");
               });
           }
       }
+
   </script>
 
 
