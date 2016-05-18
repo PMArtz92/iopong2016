@@ -54,12 +54,12 @@
 
 
    //game control server
-   var socket2 = io.connect('http://104.197.208.250:3030',{resource: 'socket2/socket.io', 'force new connection': true});
+   var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
 
    var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
 
-   socket.on('connect',console.log('A connected'));
-   socket2.on('connect',console.log('B connected'));
+//   socket.on('connect',console.log('A connected'));
+//   socket2.on('connect',console.log('B connected'));
 
     function onSuccess(googleUser) {
         console.log('Logged in as: ' + googleUser.getBasicProfile().getName());

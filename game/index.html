@@ -50,12 +50,9 @@
           //game control server
 
           //remove .connect
-          var socket2 = io('http://104.197.208.250:3030',{resource: 'socket2/socket.io', 'force new connection': true});
+          var socket2 = io.connect('http://104.197.201.110:3030',{resource: 'socket2/socket.io', 'force new connection': true});
 
-
-
-
-          var socket = io('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
+          var socket = io.connect('http://104.197.49.207:3000',{resource: 'socket/socket.io', 'force new connection': true});
 
           socket.emit("add-user", {"username": "gameScreen"});
 
