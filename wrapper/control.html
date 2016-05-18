@@ -50,16 +50,14 @@
     function upButtonPress(e){
         e.preventDefault();
         socket2.emit("click_function", (1 * playerId));
-        var coords = document.getElementById("text01");
-        coords.innerHTML  = "1 atha ariya";
+
     }
 
     function upButtonRelease(e){
         e.preventDefault();
 
         socket2.emit("click_function", (2 * playerId));
-        var coords = document.getElementById("text01");
-        coords.innerHTML  = "2 atha ariya";
+
 
     }
 
@@ -67,18 +65,13 @@
         e.preventDefault();
 
         socket2.emit("click_function", (3 * playerId));
-        var coords = document.getElementById("text01");
-        coords.innerHTML  = "3 atha ariya";
+
 
     }
 
     function downButtonRelease(e){
         e.preventDefault();
-
         socket2.emit("click_function", (4 * playerId));
-        var coords = document.getElementById("text01");
-        coords.innerHTML  = "4 atha ariya";
-
     }
 
 </script>

@@ -2,23 +2,7 @@ var server = require('http').createServer(handler)
     , io = require('socket.io').listen(server)
     , fs = require('fs');
 
-//mysql
-var mysql      =  require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database : 'pong'
-});
 
-connection.connect(function(err) {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-    return;
-  }
-
-  console.log('connected as id ' + connection.threadId);
-});
 
 
 

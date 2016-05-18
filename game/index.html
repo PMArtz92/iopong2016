@@ -41,11 +41,12 @@
             <div class="container" id="game-name-show">
                 <div class="col-lg-12">
                     <div class="col-lg-offset-3 col-lg-3" id="pong-player01">
+                        <ul id="pong01"></ul>
 
                     </div>
 
                     <div class="col-lg-offset-2 col-lg-3" id="pong-player02">
-
+                        <ul id="pong02"></ul>
                     </div>
                 </div>
             </div>
@@ -53,8 +54,10 @@
         </div>
 
         <div class="row">
-            <div id="qrCode" class="qrCode">
-                <h1>QR</h1>
+            <div id="qrCode" class="col-lg-12 qrCode">
+                <script>
+                    $('#qrCode').load('../wrapper/qr.html');
+                </script>
             </div>
         </div>
 
@@ -63,18 +66,6 @@
 
 </div>
 
-<div class="container-fluid player-showoff hidden">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="col-lg-6 player01" id="player01">
-            </div>
-            <div class="col-lg-6 player02" id="player02">
-            </div>
-        </div>
-
-    </div>
-
-</div>
 
 
 
@@ -149,9 +140,16 @@
           });
 
           socket.on("gameScreen-load_Game", function (data) {
-              console.log(data);
+              //console.log(data);
 
               gameCommence(data);
+              var player01 = $("<li class='players' id='"+ data[0].userId + "'>" + "<div class='pname'>" +data[0].username + "</div>" + "<span class='pimage'>" +"<img src='"+data[0].img +"' class='img-circle'>"+ "</span>"+ "</li>");
+
+              var player02 = $("<li class='players' id='"+ data[0].userId + "'>" + "<div class='pname'>" +data[0].username + "</div>" + "<span class='pimage'>" +"<img src='"+data[0].img +"' class='img-circle'>"+ "</span>"+ "</li>");
+
+              $("#pong-player01").empty().append(player01,null);
+              $("#pong-player02").empty().append(player02,null);
+
               $('#qrCode').addClass('hidden');
               $('#pong-game-board').removeClass('hidden');
 
