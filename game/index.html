@@ -151,9 +151,8 @@
           socket.on("load_Game", function (data) {
               gameCommence(data);
               $('#qrCode').addClass('hidden');
-              $('#pong-game-board').removeClass('hidden', function () {
-                  document.dispatchEvent(new CustomEvent("gameStart"));
-              });
+              $('#pong-game-board').removeClass('hidden');
+              document.dispatchEvent(new CustomEvent("gameStart"));
           });
 
           socket.on("gameScreen-stateChange", function (data) {

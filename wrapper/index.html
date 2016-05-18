@@ -30,20 +30,12 @@
     <!--<button type="button" id="downButton">Down</button>-->
 <!--</div>-->
 <div class="container player-controlls">
-    <div id="player-keys" class="player-keys">
-        <div class="upBtn">
-            <div id = "upButton"  class="player-upButton"></div>
-        </div>
-        <div class="">
-            <div id = "downButton" class="col-lg-12 player-downButton"></div>
-        </div>
-    </div>
-
-
-
 
     <div id="player-signin" class="col-lg-12">
         <div id="my-signin2" class="col-lg-offset-4"></div>
+    </div>
+    <div id="load-controls">
+
     </div>
 </div>
 
@@ -127,76 +119,14 @@
 
    function playerSigned(){
        $('#player-signin').fadeOut(500).addClass('hidden');
-       $('#player-keys').removeClass('hidden').hide().fadeIn(500);
-   }
-   function absorbEvent_(event) {
-       var e = event || window.event;
-       e.preventDefault && e.preventDefault();
-       e.stopPropagation && e.stopPropagation();
-       e.cancelBubble = true;
-       e.returnValue = false;
-       return false;
-   }
 
-   function preventLongPressMenu(node) {
-       node.ontouchstart = absorbEvent_;
-       node.ontouchmove = absorbEvent_;
-       node.ontouchend = absorbEvent_;
-       node.ontouchcancel = absorbEvent_;
-   }
-
-   preventLongPressMenu(document.body);
-
-   document.body.addEventListener('touchmove', function(event) {
-       event.preventDefault();
-   }, false);
-
-   var upButton1 = document.getElementById("upButton");
-   var downButton1 = document.getElementById("downButton");
-
-   upButton1.addEventListener("touchstart", upButtonPress, false);
-   upButton1.addEventListener("touchend", upButtonRelease, false);
-
-   downButton1.addEventListener("touchstart", downButtonPress, false);
-   downButton1.addEventListener("touchend", downButtonRelease, false);
-
-   signButton.addEventListener("touchstart", signButtonPress, false);
-
-   //change socket --> socket2
-
-    function upButtonPress(e){
-       e.preventDefault();
-        socket2.emit("click_function", (1 * playerId));
-        var coords = document.getElementById("text01");
-        coords.innerHTML  = "1 atha ariya";
-   }
-
-   function upButtonRelease(e){
-       e.preventDefault();
-
-       socket2.emit("click_function", (2 * playerId));
-       var coords = document.getElementById("text01");
-       coords.innerHTML  = "2 atha ariya";
 
    }
 
-   function downButtonPress(e){
-       e.preventDefault();
-
-       socket2.emit("click_function", (3 * playerId));
-       var coords = document.getElementById("text01");
-       coords.innerHTML  = "3 atha ariya";
-
+   function load_control(){
+       document.getElementById("content").innerHTML='<object type="text/html" data="control.html" ></object>';
    }
 
-   function downButtonRelease(e){
-       e.preventDefault();
-
-       socket2.emit("click_function", (4 * playerId));
-       var coords = document.getElementById("text01");
-       coords.innerHTML  = "4 atha ariya";
-
-   }
 
     function signButtonPress(e){
         e.preventDefault();
@@ -222,11 +152,12 @@
             playerConfirm();
         }else if (data == "player1Ok"){
             playerId = 1;
-            alert("Pasan control load karapan player 1");
+            //alert("Pasan control load karapan player 1");
+            load_control();
         }else if(data == "player2Ok"){
             playerId = 5;
-            alert("Pasan control load karapan player 2");
-
+            //alert("Pasan control load karapan player 2");
+            load_control();
         }
 
     });

@@ -97,6 +97,7 @@ body {
     padding-right:5px;
     padding-top:2px;
     padding-bottom:2px;
+    align-content: center;
 }
 
 
@@ -104,16 +105,20 @@ body {
     border-radius: 50%;
     max-width: 72px;
     max-height: 72px;
-
-
+    display: block;
+    margin: 0 auto;
 }
 
 .leaderboard .pscore{
     //float: right;
     max-width: 72px;
-    max-height: 72px;
+    max-height: 75px;
     text-align: center;
-    line-height: 72px;
+    line-height: 75px;
+    font-weight: 800;
+    font-size: 24px;
+    color: #fff;
+    background-color: #009925 ;
 
 }
 
@@ -163,6 +168,7 @@ body {
     top:75%;
     background-size:cover;
     background-color: #176566;
+    overflow: hidden;
 
 }
 
@@ -188,6 +194,7 @@ body {
     top:-75%;
     background-size:cover;
     background-color: #176566;
+    overflow: hidden;
 
 }
 
