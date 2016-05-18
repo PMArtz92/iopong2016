@@ -270,7 +270,12 @@ io.sockets.on('connection', function (socket) {
           {"player1":clients[player1_user_id].username});
 
       // send players to notification
-      io.sockets.connected[player1_socket_id].emit("notification", "confirm");
+        try{
+            io.sockets.connected[player1_socket_id].emit("notification", "confirm");
+        }
+        catch (err){
+            console.log(err);
+        }
 
       //set time out
       player1timeOut = setTimeout(selectPlayer1, 10000);
@@ -282,7 +287,7 @@ io.sockets.on('connection', function (socket) {
   }
 
   function selectPlayer2(){
-    io.sockets.connected[control_client["mainScreen"].socket].emit("stateChange", "selecting player 2");
+    io.emit("mainScreen-stateChange", "selecting player 2");
 
     if (checkPlayers()){
       player2_user_id  = playerSelect();
@@ -296,7 +301,13 @@ io.sockets.on('connection', function (socket) {
           {"player2":clients[player2_user_id].username});
 
       // send players to notification
-      io.sockets.connected[player2_socket_id].emit("notification", "confirm");
+        try{
+            io.sockets.connected[player2_socket_id].emit("notification", "confirm");
+        }
+        catch (err){
+            console.log(err);
+        }
+
 
       player2timeOut = setTimeout(selectPlayer2, 10000);
     }else{
@@ -342,7 +353,14 @@ io.sockets.on('connection', function (socket) {
 
     var tempuser1 = clients[player1_user_id];
     io.emit("mainScreen-player1confirm", {"username":tempuser1.username,"userId":tempuser1.userId,"img":tempuser1.img});
-    io.sockets.connected[player1_socket_id].emit("notification", "player1Ok");
+
+      try{
+          io.sockets.connected[player1_socket_id].emit("notification", "player1Ok");
+      }
+      catch (err){
+          console.log(err);
+      }
+
     clearTimeout(player1timeOut);
     startGame();
 
@@ -351,8 +369,15 @@ io.sockets.on('connection', function (socket) {
   function player2Confirm(){
     player2confirm = true;
     var tempuser2 = clients[player2_user_id];
-    io.emit("mainScreen-player2confirm", {"username":tempuser2.username,"userId":tempuser2.userId,"img":tempuser2.img});
-    io.sockets.connected[player2_socket_id].emit("notification", "player2Ok");
+    io.emit("mainScreen-player2confirm", {"username":tempuser2.username,"userId":tempuser2.userId,"img":tempuser2.img})
+
+      try{
+          io.sockets.connected[player2_socket_id].emit("notification", "player2Ok");
+      }
+      catch (err){
+          console.log(err);
+      }
+
     clearTimeout(player2timeOut);
     startGame();
 
@@ -392,9 +417,15 @@ io.sockets.on('connection', function (socket) {
 
 
     //change the player screen
-    io.sockets.connected[player1_socket_id].emit("notification", "game finished");
+      try{
+          io.sockets.connected[player1_socket_id].emit("notification", "game finished");
 
-    io.sockets.connected[player2_socket_id].emit("notification", "game finished");
+          io.sockets.connected[player2_socket_id].emit("notification", "game finished");
+      }
+      catch (err){
+          console.log(err);
+      }
+
 
     //change game screen
     io.emit("gameScreen-stateChange", "load_QR_code");
