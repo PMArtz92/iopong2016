@@ -302,9 +302,6 @@ io.sockets.on('connection', function (socket) {
     }else{
       clearTimeout(player2timeOut);
     }
-
-
-
   }
 
   function checkPlayers(){
